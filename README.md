@@ -9,18 +9,19 @@ This analysis will look at Walmart clothing reviews to find key features that pr
 Data is scraped directly from the Walmart webpage between November 27 to November 30 using Selenium and BeautifulSoup . The webpage urls and item links can be found in item_links folder and in the scraper notebook as well. 
 
 ### Models:
-Best perfoming model in order:
+Best perfoming models:
 
-1. Random Forest F1 score of 0.829
-2. Logistic Regression F1 score of 0.827
-3. Support Vector Classifier - Radial Basis Function F1 score of 0.809
+1. Random Forest F1 score of 0.826
+2. Logistic Regression F1 score of 0.823
+3. Bernoulli Naive Bayes F1 score of 0.828
 
 ![findings](images/f1score.png)
 
 ### Findings:
 Since the items were scraped towards winter, most of the displayed items were related to the winter months in general pages that were scraped. 
 
-Fruit Of The "Loom" brand, "Inner" wear products, "warmer" products and 'sneakers" seem to be some of the features that tend to lead customers to recommened the item. "Slip" derives from words such as slipping and slippers once it has been Lemmatized. There are instances where "slip" appeares in both recommended and non recommended items. However, the word containing slip is usually 
+I discover that "comfort", "comfortable" and words from topic 6 seem to be some of the features that tend to lead customers to recommened the item. 
+I would highly recommend that Walmart strength their quality control. Fit and size seems to be one of the most important criteria for customers. This tracks because customers would like to receive the size they purchased and not deal with the return process. Additioanlly, words like "rough" tend to drive recommendation down.
 
 ![findings](images/log_coef_feats.png)
 ### Recommendation 
@@ -105,7 +106,7 @@ Since the goal of this project and analysis is to find features that would point
 Overall, the F1 score for all the models scored fairly well. The reason I chose F1 score as a metric is because it takes both percision and recall into account. 
 ![findings](images/f1score.png)
 
-Since I want to be able to suggest Walmart's Marketing Team the features that customer's seem to be basing their recommendation, we would want to use the most interpretable model. In this case, I use the Logistic Regression's coefficients to get the important features. We discover that Fruit Of The "Loom" brand, "Inner" wear, "warmer" products and 'sneakers" seem to be some of the features that tend to lead customers to recommened the item. This might because the products were scraped towards the winter months. 
+Since I want to be able to suggest Walmart's Marketing Team the features that customer's seem to be basing their recommendation, we would want to use the most interpretable model. In this case, I use the Logistic Regression's coefficients to get the important features. I discover that "comfort", "comfortable" and topic 6, generated from LDA model, seem to be some of the features that tend to lead customers to recommened the item. 
 
 ![findings](images/log_coef_feats.png)
 ![findings](images/grid_tree.png)
@@ -115,11 +116,16 @@ Since Random Forest is a Black Box model, we cannot say exactly how these import
 ## Conclusion
 Since the items were scraped towards winter, most of the displayed items were related to the winter items. 
 
-My models produced a decent F1 score and the features extracted from the Logistic Regression and GridSearchCV with RandomForest Classifier support each other. Therefore, my recommendation to Walmart marketing team would be to promote items that have a wider range of color and how an item is true to size. If items fit well, then it is often recommended. Whereas, Customer's having to return products due to sizing issues seem to be non-recommended. 
+My models produced a decent F1 score and the features extracted from the Logistic Regression and GridSearchCV with RandomForest Classifier support each other. Therefore, my recommendation to Walmart marketing team would be to promote items that are true to size. If items fit well, then it is often recommended. Additionally, a proper fit is also "comfortable" and my analysis found that "comfort" drives recommendation.  Whereas, Customer's having to return products due to sizing issues seem to push items to being non-recommended. 
 
-The size of the pockets seem to really matter for customers. Additionally, it seems like quality control needs to be addressed. Walmart partners with brands, large and small, and sells their items online. However, when items are received by the customers in bad condition, Walmart receives the blame causing their public image to be degraded. 
+One way to tackle this would to be do additional research and tests on the partner brands to see how ture to size their products are. 
 
-"Slip" derives from words such as slipping and slippers once it has been Lemmatized. There are instances where "slip" appeares in both recommended and non recommended items. However, the word containing slip by itself is usually is used in a negative context. 
+Additionally, it seems like quality control needs to be addressed. 
+
+* "When we opened the vacuum sealed packaging that this Mario suit came in, we were completely overwhelmed by a smell of mold and mildew."
+* "First, the sweater came smelling really bad like vinegar. Worst of all, the design came off after just one wash!"
+
+Walmart partners with brands, large and small, and sells their items online. However, when items are received by the customers in bad condition, Walmart receives the blame causing their public image to be degraded. 
 
 ## Next Steps
 During this analysis, I discovered that Brand's would get compared to each other in the reviews. For example, an inner wear item, Disney Junior Toddler Girls Sofia the First, was compared to Fruit of The Loom.
@@ -128,14 +134,13 @@ During this analysis, I discovered that Brand's would get compared to each other
 
 Therefore, I would like to see if there are certain brands that do better than others. This finding could also influence how Walmart might market the products. 
 
-Another place I would like to spend more time is exploring whether lemmatize or stemming should even be considered. For instance, based on logistic regression, the word "Slip" leads to a "non recommendation". However, I found this to not be true. "Slip" was lemmatized from Slippers, slippery, slips, slipping. Slip was being refered correctly at itmes, where customers were talking about how the elastic does not perform well and causes the pants to slip and the item was not recommended. And other times, it was lemmatized from slippers
+Another place I would like to spend more time is exploring whether lemmatize or stemming should even be considered. For instance, "Slip" was lemmatized from Slippers, slippery, slips, slipping. Slip was being refered correctly at itmes, where customers were talking about how the elastic does not perform well and causes the pants to slip and the item was not recommended. And other times, it was lemmatized from slippers
 
 * 'Hubby also claims they slip down easily if not tied tightly.
 
 * 'I sadly had to return my ballet slipper pink because I ordered the wrong size.'
 
-Lastly, another step that I would like to take would be scraping Walmart every season to see how the reviews differe among the seasons. 
-
+Lastly, another step that I would like to take would be scraping Walmart every season to see how the reviews differ among the seasons. 
 
 ## For More Information
 
