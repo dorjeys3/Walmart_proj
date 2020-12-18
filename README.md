@@ -11,21 +11,27 @@ Data is scraped directly from the Walmart webpage between November 27 to Novembe
 ### Models:
 Best perfoming model in order:
 
-1. Logistic Regression F1 score of 0.827
-2. Random Forest F1 score of 0.829
+1. Random Forest F1 score of 0.829
+2. Logistic Regression F1 score of 0.827
 3. Support Vector Classifier - Radial Basis Function F1 score of 0.809
 
+![findings](images/f1score.png)
 
 ### Findings:
 Since the items were scraped towards winter, most of the displayed items were related to the winter months in general pages that were scraped. 
 
 Fruit Of The "Loom" brand, "Inner" wear products, "warmer" products and 'sneakers" seem to be some of the features that tend to lead customers to recommened the item. "Slip" derives from words such as slipping and slippers once it has been Lemmatized. There are instances where "slip" appeares in both recommended and non recommended items. However, the word containing slip is usually 
 
-![findings](images/f1score.png)
 ![findings](images/log_coef_feats.png)
+### Recommendation 
+My recommendation to Walmart marketing team would be to promote items that have a wider range of color and how an item is true to size. If items fit well, then it is often recommended. Whereas, Customer's having to return products due to sizing issues seem to be non-recommended. 
 
+Additionally, it seems like quality control needs to be addressed. Walmart partners with brands, large and small, and sells their items online. However, when items are received by the customers in bad condition, Walmart receives the blame causing their public image to be degraded. 
 
-## Business Motivation
+---
+
+---
+# Business Motivation
 2020 has been a hectic year but it has shown the importance of technology across all sectors. One of the major sectors being retail. 
 "Save Money, Live Better" is Walmart's motto and philosophy and inorder for Walmart to live by their slogan, they need to be able to get the "best" items out for their customers based on the customer's want and need, both in store and online. 
 
@@ -33,7 +39,7 @@ Walmart is known for being the [King of retail stores](https://www.pioneeringmin
 
 However, currently, Walmart's online market promotes clothing products by price range and brand. Within these subcategory, itesm are displayed by "clerance", "best seller" and then the new and regular items. 
 
-Clerance are the items on sale - "save money, live better" - this makes sense. The "new" and regualr items are the rest of the goods that Walmart carries - this also makes sense. 
+Clerance are the items that are on sale - "save money, live better" - this makes sense. The "new" and regular items are the rest of the goods that Walmart carries - this also makes sense. 
 
 However, most of the "best seller" items that I found, had very few people rateings on them and some did not even contain any text reviews. Walmart might have generated these "best seller" items from their sales data but for an online space, where customers cannot touch or feel the products, its really important to get feedback from other purchasers. So recommending products based on purely sales records does not help in the online space.
 
@@ -48,6 +54,8 @@ Data is scraped directly from the Walmart webpage between November 27 to Novembe
 One of the obstacles of scraping Walmart was the Captcha that it would require you complete. This maybe due to the high number of requests received by Walmart server from the scraping. To get around this, you can either extend the ```time.sleep()``` method or use a VPN. I used a VPN and although successful, it still ran into captchas. 
 
 Overall, I was able to obtain 1,225 observations (308 men's items, 471 women's items, 154 boys' items and 292 girls' items). After data cleaning and preprocessing, this number was 1,149 observations. These dataframes can be found in the ```item_review``` folder or [here](https://github.com/dorjeys3/Walmart_proj/tree/master/data/Item_review).   
+
+![](images/rating_section_target.png)
 
 ## Methods
 Since this dataframe consist of both continuous variables and text, the project was divided into three notebooks:
@@ -96,7 +104,8 @@ Since the goal of this project and analysis is to find features that would point
 ## Results
 Overall, the F1 score for all the models scored fairly well. The reason I chose F1 score as a metric is because it takes both percision and recall into account. 
 ![findings](images/f1score.png)
-Since I want to be able to suggest Walmart's Marketing Team the features that customer's seem to be basing their recommendation, we would want to use the most interpretable model. In this case, I will be using the Logistic Regression's coefficients to get the top features. 
+
+Since I want to be able to suggest Walmart's Marketing Team the features that customer's seem to be basing their recommendation, we would want to use the most interpretable model. In this case, I use the Logistic Regression's coefficients to get the important features. We discover that Fruit Of The "Loom" brand, "Inner" wear, "warmer" products and 'sneakers" seem to be some of the features that tend to lead customers to recommened the item. This might because the products were scraped towards the winter months. 
 
 ![findings](images/log_coef_feats.png)
 ![findings](images/grid_tree.png)
@@ -106,9 +115,7 @@ Since Random Forest is a Black Box model, we cannot say exactly how these import
 ## Conclusion
 Since the items were scraped towards winter, most of the displayed items were related to the winter items. 
 
-My models produced a decent F1 score and the features extracted from the Logistic Regression and GridSearchCV with RandomForest Classifier support each other. Therefore, my recommendation to Walmart marketing team would be to promote items that have a wider range of color and how an item is true to size. If items fit well, then it is often recommended. Whereas, Customer's having to return products due to sizing issues seem to be non-recommended. They should also keep an eye on quality control. 
-
-Fruit Of The "Loom" brand, "Inner" wear, "warmer" products and 'sneakers" seem to be some of the features that tend to lead customers to recommened the item. Again, this might because the products were scraped towards the winter months.
+My models produced a decent F1 score and the features extracted from the Logistic Regression and GridSearchCV with RandomForest Classifier support each other. Therefore, my recommendation to Walmart marketing team would be to promote items that have a wider range of color and how an item is true to size. If items fit well, then it is often recommended. Whereas, Customer's having to return products due to sizing issues seem to be non-recommended. 
 
 The size of the pockets seem to really matter for customers. Additionally, it seems like quality control needs to be addressed. Walmart partners with brands, large and small, and sells their items online. However, when items are received by the customers in bad condition, Walmart receives the blame causing their public image to be degraded. 
 
@@ -138,7 +145,6 @@ For further clarificaiton or inquiries you can email: ```dorjeys3@gmail.com```.
 * Twiter: [dorjeys3](https://twitter.com/dorjeys3)
 
 
-
 ## Repository Structure
 
 <pre>
@@ -147,6 +153,7 @@ For further clarificaiton or inquiries you can email: ```dorjeys3@gmail.com```.
 ├── 2_walmart_product_review_nlp.ipynb
 ├── 3_walmart_product_review_nlp.ipynb
 ├── README.md
+├── Walmart\ Review\ Analysis.pdf
 ├── Walmart_scraper
 │   ├── walmart_Items_scraper.ipynb
 │   └── walmart_review_scraper.ipynb
@@ -167,19 +174,18 @@ For further clarificaiton or inquiries you can email: ```dorjeys3@gmail.com```.
 │   │   └── walmart_womens_reviews.csv
 │   ├── clean_df.csv
 │   ├── cleaning_df.csv
-│   ├── modeling_df.pkl
-│   └── sectioning_df.csv
+│   └── modeling_df.pkl
 ├── images
+│   ├── f1score.png
 │   ├── grid_tree.png
 │   ├── items_no_reviews.png
 │   ├── log_coef_feats.png
 │   ├── overall_rating.png
+│   ├── price_rec.png
+│   ├── rating_bins.png
 │   ├── rating_section_target.png
 │   ├── recommended_dist.png
-│   ├── roc.png
+│   ├── target.png
 │   └── walmart_logo.png
-├── modeling_df
-├── recommended_dist.png
 └── scripts
-    └── scripts.py
-</pre>
+    └── scripts.py</pre>
