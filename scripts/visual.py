@@ -48,8 +48,8 @@ def fdist(df, column):
     corpus = " ".join([" ".join(text) for text in df[column].to_list()])
     corpus = tokenize(corpus)
     fdist=FreqDist(corpus)
-    print(f"Number of words in corpus: {len(fdist)}")
-    fdist.plot(20);
+    fdist.plot(20)
+    print(f"Number of words in corpus: {len(fdist)}");
 
 def neg_cloud():
     no_rec_text = no_rec["lemma_words"].values
@@ -61,7 +61,7 @@ def neg_cloud():
     plt.title("Wordcloud for Non Recommended items", fontsize = 35)
 
 def pos_cloud():
-    yes_rec = clean_df[clean_df.target == 1]   
+    yes_rec = clean_df[clean_df.target == 1]
     yes_rec_text = yes_rec["lemma_words"].values
     yes_rec_text = "".join("".join(word) for word in text)
     fig, ax = plt.subplots(figsize=(12,17))
