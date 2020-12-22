@@ -1,7 +1,14 @@
 
 import matplotlib.pyplot as plt
 import seaborn as sns
+import nltk
 from nltk.probability import FreqDist
+from nltk.tokenize import word_tokenize
+from nltk.probability import FreqDist
+
+
+def tokenize(text):
+    return nltk.word_tokenize(text)
 
 def violin_plot(df, x_columns, y_columns, title=None,
  x_label=None, y_label=None, tick_labels = None):
@@ -43,3 +50,22 @@ def fdist(df, column):
     fdist=FreqDist(corpus)
     print(f"Number of words in corpus: {len(fdist)}")
     fdist.plot(20);
+
+def neg_cloud():
+    no_rec_text = no_rec["lemma_words"].values
+    no_rec_text = "".join("".join(word) for word in text)
+    fig, ax = plt.subplots(figsize=(12,17))
+    wordcloud = WordCloud(max_words=100,collocations=False, width=1000, height=700, background_color="white", random_state=0).generate(no_rec_text)
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis("off")
+    plt.title("Wordcloud for Non Recommended items", fontsize = 35)
+
+def pos_cloud():
+    yes_rec = clean_df[clean_df.target == 1]   
+    yes_rec_text = yes_rec["lemma_words"].values
+    yes_rec_text = "".join("".join(word) for word in text)
+    fig, ax = plt.subplots(figsize=(12,17))
+    wordcloud = WordCloud(max_words=100,collocations=False, width=1000, height=700, background_color="white", random_state=0).generate(yes_rec_text)
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis("off")
+    plt.title("Wordcloud for Recommended items", fontsize = 35)
