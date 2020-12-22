@@ -3,34 +3,7 @@
 ![walmart_logo](images/walmart_logo.png)
 
 
-## TL;DR
-This analysis will look at Walmart clothing reviews to find key features that predict whether a customer will recommend an item or not. The features that guide the predictions can then used to guide Walmart's online and/or in-store marketing/product campaigns. This investigation will be conducted using [Natural Language Processing](https://en.wikipedia.org/wiki/Natural_language_processing) packages and libraries. 
-### Data:
-Data is scraped directly from the Walmart webpage between November 27 to November 30 using Selenium and BeautifulSoup . The webpage urls and item links can be found in item_links folder and in the scraper notebook as well. 
-
-### Models:
-Best perfoming models:
-
-1. Random Forest F1 score of 0.826
-2. Logistic Regression F1 score of 0.823
-3. Bernoulli Naive Bayes F1 score of 0.828
-
-![findings](images/f1score.png)
-
-### Findings:
-Since the items were scraped towards winter, most of the displayed items were related to the winter months in general pages that were scraped. 
-
-I discover that "comfort", "comfortable" and words from topic 6 seem to be some of the features that tend to lead customers to recommened the item. 
-I would highly recommend that Walmart strength their quality control. Fit and size seems to be one of the most important criteria for customers. This tracks because customers would like to receive the size they purchased and not deal with the return process. Additioanlly, words like "rough" tend to drive recommendation down.
-
-![findings](images/log_coef_feats.png)
-### Recommendation 
-My recommendation to Walmart marketing team would be to promote items that have a wider range of color and how an item is true to size. If items fit well, then it is often recommended. Whereas, Customer's having to return products due to sizing issues seem to be non-recommended. 
-
-Additionally, it seems like quality control needs to be addressed. Walmart partners with brands, large and small, and sells their items online. However, when items are received by the customers in bad condition, Walmart receives the blame causing their public image to be degraded. 
-
 ---
-
 ---
 # Business Motivation
 2020 has been a hectic year but it has shown the importance of technology across all sectors. One of the major sectors being retail. 
