@@ -5,6 +5,9 @@ import nltk
 from nltk.probability import FreqDist
 from nltk.tokenize import word_tokenize
 from nltk.probability import FreqDist
+from wordcloud import WordCloud
+
+from sklearn.metrics import confusion_matrix, plot_confusion_matrix
 
 
 def tokenize(text):
@@ -51,21 +54,29 @@ def fdist(df, column):
     fdist.plot(20)
     print(f"Number of words in corpus: {len(fdist)}");
 
-def neg_cloud():
+def neg_cloud(df, column):
+    no_rec = df[df[column] == 0]
     no_rec_text = no_rec["lemma_words"].values
-    no_rec_text = "".join("".join(word) for word in text)
+    no_rec_text = "".join(" ".join(word) for word in no_rec_text)
     fig, ax = plt.subplots(figsize=(12,17))
-    wordcloud = WordCloud(max_words=100,collocations=False, width=1000, height=700, background_color="white", random_state=0).generate(no_rec_text)
+    wordcloud = WordCloud(max_words=100,collocations=False, width=1000, height=700, background_color="lightgray", random_state=0).generate(no_rec_text)
     plt.imshow(wordcloud, interpolation='bilinear')
     plt.axis("off")
     plt.title("Wordcloud for Non Recommended items", fontsize = 35)
 
-def pos_cloud():
-    yes_rec = clean_df[clean_df.target == 1]
+def pos_cloud(df, column):
+    yes_rec = df[df[column] == 1]
     yes_rec_text = yes_rec["lemma_words"].values
-    yes_rec_text = "".join("".join(word) for word in text)
+    yes_rec_text = "".join(" ".join(word) for word in yes_rec_text)
     fig, ax = plt.subplots(figsize=(12,17))
-    wordcloud = WordCloud(max_words=100,collocations=False, width=1000, height=700, background_color="white", random_state=0).generate(yes_rec_text)
+    wordcloud = WordCloud(max_words=100,collocations=False, width=1000, height=700, background_color="lightgray", random_state=0).generate(yes_rec_text)
     plt.imshow(wordcloud, interpolation='bilinear')
     plt.axis("off")
     plt.title("Wordcloud for Recommended items", fontsize = 35)
+
+
+
+def con_mat(classifier, X, y, title=None):
+    disp1 = plot_confusion_matrix(classifier, X, y, cmap=plt.cm.Blues)
+    disp1.ax_.set_title(f"{title}")
+    plt.show()
