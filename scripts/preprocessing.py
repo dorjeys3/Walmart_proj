@@ -7,16 +7,25 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from sklearn.preprocessing import OneHotEncoder
-
+import gensim
+from gensim import corpora, models
 
 lemmatizer = nltk.stem.WordNetLemmatizer()
 stop_words=list(set(stopwords.words("english")))
-# for processing string values
+eda_words = list(set(stopwords.words("english")))
+eda_stopwords = ["color", "size", "fit", "great", "pair", "right", "x",
+"xl", "nd", "de", "u", "la", "tbw", "c", "v", "great", "n", "wal", "wow",
+"hi", "hello", "nmbc", "youll", "must", "said", "either", "lol", 'ill',
+"six", "goat", "thou", "un", "lb", "pair", "right", "x", "xl", "one",
+"way", "definitely", "shirt", "jacket", "daughter", "son" ]
+eda_words.extend(eda_stopwords)
 
+
+# for processing string values
 def clean_text(text):
     text.replace("\\n"," ")
-    text =  ' '.join(re.sub("([^A-Za-z0-9!.])"," ",text).split())
-    return text
+    text =  ' '.join(re.sub("([^A-Za-z])"," ",text).split())
+    return text.lower()
 
 
 def tokenize(text):
@@ -26,13 +35,16 @@ def remove_stopwords(text):
     stop_words=list(set(stopwords.words("english")))
     return [word for word in text if word not in stop_words]
 
+def remove_eda_stopwords(text):
+    stop_words=list(set(stopwords.words("english")))
+    return [word for word in text if word not in eda_words]
+
 def lemmatize_text(text):
     return [lemmatizer.lemmatize(word) for word in text]
 
 
 def list_to_str(text):
     return ", ".join(text)
-
 
 def coded_encoder(df, column):
     encoder = OneHotEncoder(handle_unknown="error", drop="first" )
