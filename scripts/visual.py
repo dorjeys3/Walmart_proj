@@ -84,8 +84,6 @@ def pos_cloud(df, column):
     plt.axis("off")
     plt.title("Wordcloud for Recommended items", fontsize = 35)
 
-
-
 def con_mat(classifier, X, y, title=None):
     disp1 = plot_confusion_matrix(classifier, X, y, cmap=plt.cm.Blues)
     disp1.ax_.set_title(f"{title}")
