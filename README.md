@@ -6,24 +6,24 @@
 ---
 ---
 # Business Motivation
-2020 has been a hectic year but it has shown the importance of technology across all sectors. One of the major sectors being retail. 
-"Save Money, Live Better" is Walmart's motto and philosophy and inorder for Walmart to live by their slogan, they need to be able to get the "best" items out for their customers based on the customer's want and need, both in store and online. 
 
-Walmart is known for being the [King of retail stores](https://www.pioneeringminds.com/walmart/) but this is taking the physical stores into account. Since 2017, Walmart has made strong initiative to strengthen their online presence. Amidst the pandemic, Walmart saw a [74% increase in online sales in the first quarter](https://www.supermarketnews.com/retail-financial/walmart-sees-q1-us-comps-jump-10-online-sales-soar-74) as people worked from home and required goods to be delivered due to limited access to physical locations. 
+2020 has been a hectic year, and it has reinforced the importance of technology across all sectors, perhaps none more so than the retail sector. Walmart's motto and philosophy is "Save Money, Live Better", and in order for Walmart to live up to  that standard , they need to be able to provide the "best" items for their customers based on the customer's wants and needs, both in store and online.
 
-However, currently, Walmart's online market promotes clothing products by price range and brand. Within these subcategory, itesm are displayed by "clerance", "best seller" and then the new and regular items. 
+Walmart is known for being the [King of retail stores](https://www.pioneeringminds.com/walmart/) , but this is in large part due to the success of its physical stores. Starting in 2017, Walmart developed a strong initiative to strengthen its online presence. In the first quarter of 2020, amidst the pandemic, Walmart saw a [74% increase in online sales in the first quarter](https://www.supermarketnews.com/retail-financial/walmart-sees-q1-us-comps-jump-10-online-sales-soar-74) as people began working from home and required goods to be delivered directly to their door due to limited access to physical locations.
 
-Clerance are the items that are on sale - "save money, live better" - this makes sense. The "new" and regular items are the rest of the goods that Walmart carries - this also makes sense. 
+Due to this newfound need to shop online, customer ratings, reviews and recommendation scores are crucial factors in another customer's decision to purchase an item.
+After analyzing customer reviews, using Natural Language Processing, as well as other features such as LDA Topic Modeling and price, I used machine learning to extract key features that lead to a customer recommending or not recommending an item. These features can then be used to guide Walmart's online marketing/product campaigns.
+Walmart's marketing team can use my model and its findings to promote particular items that resonate best with customers.
 
-However, most of the "best seller" items that I found, had very few people rateings on them and some did not even contain any text reviews. Walmart might have generated these "best seller" items from their sales data but for an online space, where customers cannot touch or feel the products, its really important to get feedback from other purchasers. So recommending products based on purely sales records does not help in the online space.
+For example, my model determined that comfort and fit tend to drive a customer to recommend an item. If an item does not fit well, then it’s not comfortable and not worth the purchase; however, if an item is true to size and fits well, then it is comfortable and highly recommended. Therefore, Walmart could market items such as "Jeans that are always TRUE TO SIZE" and "New ComFIT (comfortable-fit) products to WFH (work from home)".
 
-Now if Walmart were able to analyze customer's reviews and promote goods based on customer's "recommended" score and descriptive keywords, Walmart's marketing team would then be better able to market products that resonates with more customers.
+
 
 ## Goal
 This analysis will look at Walmart clothing reviews to find key features that predict whether a customer will recommend an item or not. The features that guide the predictions can then used to guide Walmart's online and/or in-store marketing/product campaigns. This investigation will be conducted using [Natural Language Processing](https://en.wikipedia.org/wiki/Natural_language_processing) packages and libraries. 
 
 ## Data
-Data is scraped directly from the Walmart webpage between November 27 to November 30 using Selenium and BeautifulSoup . The webpage urls and item links can be found in [item_links folder](https://github.com/dorjeys3/Walmart_proj/tree/master/data/item_links) and in the [scraper notebook](https://github.com/dorjeys3/Walmart_proj/tree/master/Walmart_scraper) as well. 
+Data is scraped directly from the Walmart webpage between November 27 to November 30 using [Selenium](https://www.selenium.dev/) and [BeautifulSoup](https://en.wikipedia.org/wiki/Beautiful_Soup_(HTML_parser)) . The webpage urls and item links can be found in [item_links folder](https://github.com/dorjeys3/Walmart_proj/tree/master/data/item_links) and in the [scraper notebook](https://github.com/dorjeys3/Walmart_proj/tree/master/Walmart_scraper) as well. 
 
 One of the obstacles of scraping Walmart was the Captcha that it would require you complete. This maybe due to the high number of requests received by Walmart server from the scraping. To get around this, you can either extend the ```time.sleep()``` method or use a VPN. I used a VPN and although successful, it still ran into captchas. 
 
@@ -87,7 +87,6 @@ Since I want to be able to suggest Walmart's Marketing Team the features that cu
 Since Random Forest is a Black Box model, we cannot say exactly how these important features will affect the customers decisoin. But when put side by side with logistic Regression, the features extracted from GridSearchCV with RandomForest corroborats and supports the findings from the Logistic Regression. 
 
 ## Conclusion
-Since the items were scraped towards winter, most of the displayed items were related to the winter items. 
 
 My models produced a decent F1 score and the features extracted from the Logistic Regression and GridSearchCV with RandomForest Classifier support each other. Therefore, my recommendation to Walmart marketing team would be to promote items that are true to size. If items fit well, then it is often recommended. Additionally, a proper fit is also "comfortable" and my analysis found that "comfort" drives recommendation.  Whereas, Customer's having to return products due to sizing issues seem to push items to being non-recommended. 
 
@@ -112,8 +111,7 @@ Another place I would like to spend more time is exploring whether lemmatize or 
 * 'Hubby also claims they slip down easily if not tied tightly.
 
 * 'I sadly had to return my ballet slipper pink because I ordered the wrong size.'
-
-Lastly, another step that I would like to take would be scraping Walmart every season to see how the reviews differ among the seasons. 
+Since the items were scraped towards winter, most of the displayed items were related to the winter items. Another step that I would like to take would be scraping Walmart every season to see how the reviews differ among the seasons. 
 
 ## For More Information
 
@@ -167,3 +165,4 @@ For further clarificaiton or inquiries you can email: ```dorjeys3@gmail.com```.
 │   └── walmart_logo.png
 └── scripts
     └── scripts.py</pre>
+mad
