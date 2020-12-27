@@ -76,28 +76,69 @@ The models used were:
 Since the goal of this project and analysis is to find features that would point towards items being recommended or not recommended, it would be best to focus on interpretable models. Additionally, to adderss the class imbalance, we will be using the ```class_weight='balanced'``` for most of the models. 
 
 ## Results
-Overall, the F1 score for all the models scored fairly well. The reason I chose F1 score as a metric is because it takes both percision and recall into account. 
-![findings](images/f1score.png)
+Overall, the F1 score for all the models scored fairly well over the dummy classifier. The reason I chose F1 score as a metric is because it is the harmonic mean of percision and recall. This will give me an overall indication of the model. 
 
-Since I want to be able to suggest Walmart's Marketing Team the features that customer's seem to be basing their recommendation, we would want to use the most interpretable model. In this case, I use the Logistic Regression's coefficients to get the important features. I discover that "comfort", "comfortable" and topic 6, generated from LDA model, seem to be some of the features that tend to lead customers to recommened the item. 
+Precision rate is calucated by answering, When model predicted "Recommended", how often is it actually correct (number of Correctly predicted Recommended items divided by total predicted number of recommended items)?
+
+Recall rate is calucated by answering when it's actually "recommended", how often is it our model predicting correctly (number of Correctly predicted Recommended items divided by actual number of recommended items)? 
+
+After interating the modesl, here is what I found:
+
+| Model | F1 Score |
+|---|---|
+| Dummy Classifier F1 score | 0.757 |
+|Logistic Regression Baseline F1 score | 0.864|
+|Logistic Regression 2.0 F1 score is: |0.836|
+|GridSearchCV w/ Logistic Regression F1 score is:| 0.838|
+|Logistic Regression 3.0 F1 score is:| 0.838|
+|BernoulliNB Baseline F1 score is:| 0.863|
+|BernoulliNB 2.0 F1 score is:| 0.854|
+|SVC Baseline F1 score is:| 0.861|
+|SVC 2.0 F1 score is:| 0.837|
+|GridSearchCV w/ Support Vector Classifier F1 score is:| 0.863|
+|Random Forest Baseline F1 score is:| 0.879|
+|Random Forest 2.0 F1 score is:| 0.878|
+|GridSearchCV w/ Random Forest F1 score is:| 0.883|
+|GridSearchCV w/ Random Forest 2.0 F1 score is:| 0.880|
+|Random Forest 3.0 F1 score is:| 0.878|
+
+Since I want to be able to suggest Walmart's Marketing Team the features that customer's seem to be basing their recommendation, we would want to use the most interpretable model. In this case, I use the Logistic Regression's coefficients to get the important features. Although, Supoport Vector Classifier and BernoulliNB scored higher than Logistic Regression on the F1 score, the True Negative rate was much lower therefore not 
+
+The best Logisitc Regression was:
+
+|Models|F1 Scores|
+|---|---|
+|GridSearch Logistic Regression|0.838906|
+
+GridSearch with Logisitc Regression suggested that "love", "soft, "comfortable" and "tue [to] size" seem to be some of the features that tend to lead customers to recommened the item. 
 
 ![findings](images/log_coef_feats.png)
-![findings](images/grid_tree.png)
 
 Since Random Forest is a Black Box model, we cannot say exactly how these important features will affect the customers decisoin. But when put side by side with logistic Regression, the features extracted from GridSearchCV with RandomForest corroborats and supports the findings from the Logistic Regression. 
+
+|Models|F1 Scores|
+|---|---|
+|GridSearch RandomForest|0.880223|
+
+![findings](images/grid_tree.png)
+
+
 
 ## Conclusion
 
 My models produced a decent F1 score and the features extracted from the Logistic Regression and GridSearchCV with RandomForest Classifier support each other. Therefore, my recommendation to Walmart marketing team would be to promote items that are true to size. If items fit well, then it is often recommended. Additionally, a proper fit is also "comfortable" and my analysis found that "comfort" drives recommendation.  Whereas, Customer's having to return products due to sizing issues seem to push items to being non-recommended. 
 
-One way to tackle this would to be do additional research and tests on the partner brands to see how ture to size their products are. 
+Additionally, it seems like quality control needs to be addressed aside of fit and size as well. Some customers are not recommending items because the items seemed to be cheaply made and some instances smelled bad.   
 
-Additionally, it seems like quality control needs to be addressed. 
-
+* "These come from overseas so the sizing is way small. I ordered a womens medium  anf it was like an extra small. They are super thin material and the imprint is cheaply made."
 * "When we opened the vacuum sealed packaging that this Mario suit came in, we were completely overwhelmed by a smell of mold and mildew."
 * "First, the sweater came smelling really bad like vinegar. Worst of all, the design came off after just one wash!"
 
+One way to tackle this would to be do additional research and tests on the partner brands to see how ture to size their products are. 
+
 Walmart partners with brands, large and small, and sells their items online. However, when items are received by the customers in bad condition, Walmart receives the blame causing their public image to be degraded. 
+
+When I worked at a Soft Trims Textile company with large and small fashion companies, there were series of test that would need to pass for a product to be rolled into production. Perhaps, if Walmart required its partners to show results of passing the tests, then they could reduce the quality issue and promote items as having gone through series of test to assure quality. 
 
 ## Next Steps
 During this analysis, I discovered that Brand's would get compared to each other in the reviews. For example, an inner wear item, Disney Junior Toddler Girls Sofia the First, was compared to Fruit of The Loom.
@@ -124,12 +165,9 @@ For further clarificaiton or inquiries you can email: ```dorjeys3@gmail.com```.
 ## Repository Structure
 
 <pre>
-.Walmart Reviews Analysis
-├── 1_walmart_product_review_nlp.ipynb
-├── 2_walmart_product_review_nlp.ipynb
-├── 3_walmart_product_review_nlp.ipynb
+Walmart Product Review Analysis Repository
+├── Final_Walmart_Review_Analysis.ipynb
 ├── README.md
-├── Walmart\ Review\ Analysis.pdf
 ├── Walmart_scraper
 │   ├── walmart_Items_scraper.ipynb
 │   └── walmart_review_scraper.ipynb
@@ -146,12 +184,14 @@ For further clarificaiton or inquiries you can email: ```dorjeys3@gmail.com```.
 │   ├── Item_review
 │   │   ├── walmart_boys_clothing_reviews.csv
 │   │   ├── walmart_girls_clothing_reviews.csv
+│   │   ├── walmart_mens_reviews.csv
 │   │   ├── walmart_reviews.csv
 │   │   └── walmart_womens_reviews.csv
 │   ├── clean_df.csv
 │   ├── cleaning_df.csv
 │   └── modeling_df.pkl
 ├── images
+│   ├── bnb_coef_feats.png
 │   ├── f1score.png
 │   ├── grid_tree.png
 │   ├── items_no_reviews.png
@@ -163,6 +203,20 @@ For further clarificaiton or inquiries you can email: ```dorjeys3@gmail.com```.
 │   ├── recommended_dist.png
 │   ├── target.png
 │   └── walmart_logo.png
+├── notebooks
+│   ├── 1_data_cleaning_walmart_product_review_nlp.ipynb
+│   ├── 2_preprocessing_walmart_product_review_nlp.ipynb
+│   └── 3_modeling_walmart_product_review_nlp.ipynb
+├── pickle_jar
+│   └── lda.pkl
 └── scripts
-    └── scripts.py</pre>
-mad
+    ├── __init__.py
+    ├── __pycache__
+    │   ├── cleaning.cpython-36.pyc
+    │   ├── models.cpython-36.pyc
+    │   ├── preprocessing.cpython-36.pyc
+    │   └── visual.cpython-36.pyc
+    ├── cleaning.py
+    ├── models.py
+    ├── preprocessing.py
+    └── visual.py</pre>
