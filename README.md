@@ -104,13 +104,13 @@ After interating the modesl, here is what I found:
 
 Since I want to be able to suggest Walmart's Marketing Team the features that customer's seem to be basing their recommendation, we would want to use the most interpretable model. In this case, I use the Logistic Regression's coefficients to get the important features. Although, Supoport Vector Classifier and BernoulliNB scored higher than Logistic Regression on the F1 score, the True Negative rate was much lower therefore not 
 
-The best Logisitc Regression was:
+The best Logistic Regression was:
 
 |Models|F1 Scores|
 |---|---|
 |GridSearch Logistic Regression|0.838906|
 
-GridSearch with Logisitc Regression suggested that "love", "soft, "comfortable" and "tue [to] size" seem to be some of the features that tend to lead customers to recommened the item. 
+GridSearch with Logistic Regression suggested that "love", "soft, "comfortable" and "true [to] size" seem to be some of the features that tend to lead customers to recommened the item. 
 
 ![findings](images/log_coef_feats.png)
 
